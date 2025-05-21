@@ -35,3 +35,11 @@ Step 7: Run the application using following command.
         uvicorn src.app:app --reload
 
 
+
+## To make Custom LLM
+        ollama create t3k-llama2 -f Modelfile
+
+
+
+New dependencies
+        pip install langchain langchain-community
