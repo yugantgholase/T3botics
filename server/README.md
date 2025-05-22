@@ -28,7 +28,7 @@ Step 5: Activate the virtual enviroment
 
 Step 6: Install the dependencies using following command
 
-        pip freeze > requirements.txt
+        pip install -r requirements.txt
 
 Step 7: Run the application using following command.
 
