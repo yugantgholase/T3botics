@@ -32,7 +32,7 @@ Step 6: Install the dependencies using following command
 
 Step 7: Run the application using following command.
 
-        uvicorn src.app:app --reload
+        python app.py
 
 
 
