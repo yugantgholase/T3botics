@@ -28,10 +28,18 @@ Step 5: Activate the virtual enviroment
 
 Step 6: Install the dependencies using following command
 
-        pip freeze > requirements.txt
+        pip install -r requirements.txt
 
 Step 7: Run the application using following command.
 
-        uvicorn src.app:app --reload
+        python app.py
 
 
+
+## To make Custom LLM
+        ollama create t3k-llama2 -f Modelfile
+
+
+
+New dependencies
+        pip install langchain langchain-community
