@@ -1,15 +1,15 @@
-import './App.css'
-import Chatbot from './components/chatbot'
+import "./App.css";
+import Chatbot from "./components/chatbot";
 
-const className = 'bg-stone-800 w-screen h-screen text-white relative border border-amber-200 overflow-hidden';
+const className =
+  "bg-stone-800 w-screen h-screen text-white relative overflow-hidden";
 
 function App() {
-
   return (
-    <div className={className}>
+    <div className={className} id="app">
       <Chatbot />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -33,7 +33,7 @@ const InputBox: React.FC<InputBoxProps> = ({ sendMessage }) => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
             />
-            <button type="submit" className='px-2 inline cursor-pointer disabled:text-red-500' disabled={isProcessing}>
+            <button type="submit" className='inline cursor-pointer disabled:text-[#867E99]' disabled={isProcessing}>
                 <IoIosSend className="rounded-full" fontSize={30} />
             </button>
         </form>

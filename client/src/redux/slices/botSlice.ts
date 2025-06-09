@@ -1,18 +1,30 @@
 import type { Conversation } from "../../components/chatbot/ChatRoom";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+// const dummyFollowup = [
+//   "What are the specific performance metrics that degrade when exceeding the maximum number of devices?",
+//   "How does this degradation impact overall system availability?",
+//   "Can you provide more information on how to monitor andtroubleshoot MAC authentication issues when exceeding themaximum number of devices?",
+// ];
+
+export type WindowSize = "normal" | "minimized" | "maximized";
+type ConnectionStatus = "Connecting" | "Connected" | "Failed" | "Disconnected";
+
 interface BotSliceState {
+  windowSize: WindowSize;
   conversation: Array<Conversation>;
-  connectionStatus: string;
+  followupQuestions: Array<string>;
+  connectionStatus: ConnectionStatus;
   responseStream: string;
   isStreaming: boolean;
   isProcessing: boolean;
 }
 
 const initialState: BotSliceState = {
-  // socket: null,
+  windowSize: "normal",
   conversation: [],
-  connectionStatus: "Connecting...",
+  followupQuestions: [],
+  connectionStatus: "Connecting",
   responseStream: "",
   isStreaming: false,
   isProcessing: false,
@@ -22,11 +34,19 @@ const botSlice = createSlice({
   name: "bot",
   initialState,
   reducers: {
+    setWindowSize(state, action: PayloadAction<WindowSize>) {
+      state.windowSize = action.payload;
+    },
+
     setConversation(state, action: PayloadAction<Conversation>) {
       state.conversation.push(action.payload);
     },
 
-    setConnectionStatus(state, action: PayloadAction<string>) {
+    setFollowupQuestions(state, action: PayloadAction<Array<string>>) {
+      state.followupQuestions = action.payload;
+    },
+
+    setConnectionStatus(state, action: PayloadAction<ConnectionStatus>) {
       state.connectionStatus = action.payload;
     },
 
@@ -45,7 +65,9 @@ const botSlice = createSlice({
 });
 
 export const {
+  setWindowSize,
   setConversation,
+  setFollowupQuestions,
   setConnectionStatus,
   setResponseStream,
   setIsStreaming,

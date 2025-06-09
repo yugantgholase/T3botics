@@ -49,7 +49,7 @@ const BotTyping = React.memo((props: BotTypingProps) => {
       if (intervalRef.current) clearInterval(intervalRef.current);
       dispatch(
         setConversation({
-          message: streamBufferRef.current.trim(),
+          message: streamBufferRef.current,
           writer: "bot",
         })
       );
@@ -72,7 +72,7 @@ const BotTyping = React.memo((props: BotTypingProps) => {
     <div className="flex gap-2 items-start max-w-[90%] sm:max-w-[80%] ml-4 mt-5 p-1">
       <VscRobot className="rounded-full text-4xl border-2 text-blue-300 flex-shrink-0" />
       <p
-        className={`bg-slate-700 rounded-md text-sm sm:text-base break-words 
+        className={`bg-slate-700 rounded-md rounded-tl-none text-sm sm:text-base break-words whitespace-pre-wrap
                 text-left ${isStreaming ? "p-3" : "p-2"}`}
       >
         {isStreaming ? (

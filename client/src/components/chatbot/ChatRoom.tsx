@@ -6,17 +6,15 @@ import useWebSocket from "../../hooks/useWebSocket";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
 import InputBox from "./InputBox";
+import FollowupQestions from "./FollowupQestions";
 
 export interface Conversation {
   message: string;
   writer: "bot" | "user";
 }
 
-const ChatRoom: React.FC = () => {
+const ChatRoom: React.FC = React.memo(() => {
   const { socket, sendMessage } = useWebSocket();
-  const connectionStatus = useSelector(
-    (state: RootState) => state.bot.connectionStatus
-  );
   const conversation = useSelector(
     (state: RootState) => state.bot.conversation
   );
@@ -24,15 +22,12 @@ const ChatRoom: React.FC = () => {
     (state: RootState) => state.bot.isProcessing
   );
 
-  console.log(
-    `re-render ImprovedChatRoom connextionStatus : ${connectionStatus}`
+  const followupQuestions = useSelector(
+    (state: RootState) => state.bot.followupQuestions
   );
 
   return (
-    <div className="overflow-y-scroll">
-      <div className="connection-status flex justify-center mt-3">
-        {connectionStatus}
-      </div>
+    <div className="">
       {conversation.map((chat, index) =>
         chat.writer === "bot" ? (
           <BotResponse key={index} message={chat.message} />
@@ -42,9 +37,16 @@ const ChatRoom: React.FC = () => {
       )}
 
       {isProcessing && <BotTyping socket={socket} />}
+
+      {followupQuestions.length > 0 && (
+        <FollowupQestions
+          questions={followupQuestions}
+          sendMessage={sendMessage}
+        />
+      )}
       <InputBox sendMessage={sendMessage} />
     </div>
   );
-};
+});
 
 export default ChatRoom;
